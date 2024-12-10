@@ -28,6 +28,10 @@ conda config --add channels defaults
 conda config --add channels bioconda
 conda config --add channels conda-forge 
 ```
+- Verifique-se de que o **pip** está instalado no seu terminal rodando o comando:
+```
+pip --version
+```
 - Em seguida, pode iniciar a instalação e inicialização dos programas necessários para a montagem. Para isso, segue o passo a passo do arquivo ```instalacao.sh```
 
 ## Contato:
