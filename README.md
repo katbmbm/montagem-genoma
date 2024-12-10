@@ -18,4 +18,5 @@ Recomendamos executar a montagem em um computador com **no mínimo 32GB** de mem
 
 ## Contato:
 katherine.b@aluno.ifsp.edu.br
+
 luiza.souza@aluno.ifsp.edu.br
