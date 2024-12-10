@@ -12,12 +12,10 @@ Para melhores resultados, recomendamos realizar a quantificação do DNA para as
 Recomendamos executar a montagem em um computador com **no mínimo 32GB** de memória **RAM**.
 
 ## Como usar esse repositório:
-- É necessário clonar esse repositório, e abrir ele em uma ferramenta de desenvolvedor como o Visual Studio.
--
--
--
+- É necessário clonar esse repositório, e abrir ele em uma ferramenta de desenvolvedor como o Visual Studio
+- Começando pelo arquivo XXX, segue todas as instruções marcadas em comentários
+- XXX
 
-Contato:
-- 
+## Contato:
 Em caso de 
 
