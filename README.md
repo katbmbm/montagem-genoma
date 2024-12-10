@@ -32,7 +32,8 @@ conda config --add channels conda-forge
 ```
 pip --version
 ```
-- Em seguida, pode iniciar a instalação e inicialização dos programas necessários para a montagem. Para isso, segue o passo a passo do arquivo ```instalacao.sh```
+- Em seguida, pode iniciar a **instalação e inicialização dos programas** necessários para a montagem. Para isso, segue o passo a passo do arquivo ```instalacao.sh```
+- Para a montagem em si, segue os commandos do arquivo ``???```
 
 ## Contato:
 katherine.b@aluno.ifsp.edu.br
