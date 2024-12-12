@@ -64,7 +64,7 @@ entry_input = ctk.CTkEntry(input_frame, width=350)
 entry_input.grid(row=0, column=0, padx=5, pady=10)
 
 # Botões
-browse_button = ctk.CTkButton(input_frame, text="Selecionar .FASTA", command=select_fasta_file)
+browse_button = ctk.CTkButton(input_frame, text="Selecionar FASTA", command=select_fasta_file)
 browse_button.grid(row=0, column=1, padx=5, pady=10)
 button_start = ctk.CTkButton(
     app, text="Iniciar Montagem", command=start_assembly, font=ctk.CTkFont(size=14), width=160, height=35
