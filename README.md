@@ -14,11 +14,11 @@ Para desenvolver o projeto, usamos como base os códigos disponíveis no seguint
 
 ## Como usar esse repositório:
 - É necessário **clonar** esse repositório e abrir ele em uma ferramenta de desenvolvedor como o Visual Studio
-- No terminal do Linux ou no WSL, instalar miniconda com o seguinte código:
+- No terminal do **Linux** ou no **WSL**, instalar **miniconda** com o seguinte código:
 ```
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh bash Miniconda3-latest-Linux-x86_64.sh
 ```
-- Ativar o miniconda:
+- Ativar o **miniconda**:
 ```
 source ~/miniconda3/bin/activate
 ```
