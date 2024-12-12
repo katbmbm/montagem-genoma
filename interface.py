@@ -1,5 +1,7 @@
-# Instalar o import do customtkinter rodando o seguinte codigo no Prompt de Commando ou Terminal:
+# Instalar o import do customtkinter rodando o seguinte codigo no Terminal:
+
 # pip install customtkinter
+
 # Em seguida, rodar esse arquivo por inteiro
 
 import customtkinter as ctk
@@ -8,24 +10,24 @@ from tkinter import filedialog, messagebox
 
 def select_fasta_file():
     file_path = filedialog.askopenfilename(
-        title="Selecione um arquivo .FASTA", filetypes=[("FASTA Files", "*.fasta"), ("All Files", "*.*")]
+        title="Selecione um arquivo FASTA", filetypes=[("FASTA DNA", "*.fna"), ("All Files", "*.*")]
     )
 
-    if file_path.endswith(".fasta"):
+    if file_path.endswith(".fna"):
         entry_input.delete(0, ctk.END)
         entry_input.insert(0, file_path)
     else:
-        messagebox.showerror("Erro", "Por favor, selecione um arquivo .FASTA válido.")
+        messagebox.showerror("Erro", "Por favor, selecione um arquivo FASTA válido.")
 
 # Comecar montagem
 def start_assembly():
     input_file = entry_input.get()
     
     if not input_file:
-        messagebox.showerror("Erro", "Por favor, selecione um arquivo .FASTA.")
+        messagebox.showerror("Erro", "Por favor, selecione um arquivo FASTA.")
         return
 
-    result_label.configure(text=f"Iniciando montagem...\nArquivo: {input_file}")
+    result_label.configure(text=f"Iniciando montagem... Arquivo: {input_file}")
 
 # Abrir a janela
 app = ctk.CTk()
@@ -69,9 +71,9 @@ button_start = ctk.CTkButton(
 )
 button_start.pack(pady=30)
 
-# Result label (you missed this part, assuming you want to show the assembly result status)????????????????
+# Mensagem de iniciação da montagem
 result_label = ctk.CTkLabel(app, text="", font=ctk.CTkFont(size=14))
-result_label.pack(pady=10)
+result_label.pack(pady=5)
 
 # Rodar a aplicação
 app.mainloop()
