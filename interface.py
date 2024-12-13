@@ -7,6 +7,7 @@
 import customtkinter as ctk
 import tkinter as tk
 from tkinter import filedialog, messagebox
+import time
 
 def select_fasta_file():
     file_path = filedialog.askopenfilename(
@@ -19,7 +20,6 @@ def select_fasta_file():
     else:
         messagebox.showerror("Erro", "Por favor, selecione um arquivo FASTA válido.")
 
-# Comecar montagem
 def start_assembly():
     input_file = entry_input.get()
     
@@ -27,25 +27,53 @@ def start_assembly():
         messagebox.showerror("Erro", "Por favor, selecione um arquivo FASTA.")
         return
 
-    result_label.configure(text=f"Iniciando montagem... Arquivo: {input_file}")
+    # Disable the button
+    button_start.configure(state="disabled", fg_color="gray")
+
+    result_label.configure(text=f"Montagem em progresso\nArquivo: {input_file}")
+
+    # Create and start the progress bar
+    create_progress_bar()
+    simulate_progress()
+
+def create_progress_bar():
+    progress_bar.pack(pady=10)
+    percent_label.pack(pady=0)
+
+def simulate_progress():
+    total = 100
+    progress = 0
+
+    while progress <= total:
+        if progress < 1:
+            time.sleep(2)
+        else:
+            time.sleep(5) 
+
+        progress_bar.set(progress / total)
+        percent_label.configure(text=f"{progress}%")
+        app.update_idletasks()
+        progress += 1
+
+    result_label.configure(text="Montagem concluída!\nRealize o download do genoma montado.")
 
 # Abrir a janela
 app = ctk.CTk()
 app.title("Montagem de Genoma Bacteriano")
-app.geometry("700x450")
+app.geometry("800x570")
 ctk.set_appearance_mode("dark")
 
 # Titulo
 title_label = ctk.CTkLabel(
     app, text="Montagem de Genoma Bacteriano",
-    font=ctk.CTkFont(size=20, weight="bold")
+    font=ctk.CTkFont(size=23, weight="bold")
 )
 title_label.pack(pady=20)
 
 # Indicações
 indications_title = ctk.CTkLabel(
     app, text="Indicações para Melhores Resultados:",
-    font=ctk.CTkFont(size=14, weight="bold"), justify="left", anchor="w" 
+    font=ctk.CTkFont(size=17, weight="bold"), justify="left", anchor="w" 
 )
 indications_title.pack(pady=(10, 0))
 indications_label = ctk.CTkLabel(
@@ -53,25 +81,28 @@ indications_label = ctk.CTkLabel(
                "Utilize o Ligation Sequencing Kit da Oxford Nanopore para a geração de dados brutos de alta qualidade.\n"
                "Execute a montagem genômica em um computador com no mínimo 32 GB de memória RAM.\n"
                "Recomendamos o uso de Linux ou Windows com o WSL devidamente configurado."), 
-    font=ctk.CTkFont(size=13), justify="left", wraplength=500
+    font=ctk.CTkFont(size=15), justify="left", wraplength=550
 )
 indications_label.pack(pady=10, padx=20)
 
 # Input
 input_frame = ctk.CTkFrame(app)
 input_frame.pack(pady=20, padx=20)
-entry_input = ctk.CTkEntry(input_frame, width=350)
+entry_input = ctk.CTkEntry(input_frame, width=370)
 entry_input.grid(row=0, column=0, padx=5, pady=10)
 
 # Botões
-browse_button = ctk.CTkButton(input_frame, text="Selecionar FASTA", command=select_fasta_file)
+browse_button = ctk.CTkButton(input_frame, text="Selecionar .FASTA", command=select_fasta_file, font=ctk.CTkFont(size=13))
 browse_button.grid(row=0, column=1, padx=5, pady=10)
 button_start = ctk.CTkButton(
     app, text="Iniciar Montagem", command=start_assembly, font=ctk.CTkFont(size=14), width=160, height=35
 )
 button_start.pack(pady=30)
 
-# Mensagem de iniciação da montagem
+# Barra de progresso
+progress_bar = ctk.CTkProgressBar(app, width=500)
+progress_bar.set(0)
+percent_label = ctk.CTkLabel(app, text="0%", font=ctk.CTkFont(size=14))
 result_label = ctk.CTkLabel(app, text="", font=ctk.CTkFont(size=14))
 result_label.pack(pady=5)
 
