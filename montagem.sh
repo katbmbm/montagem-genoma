@@ -1,4 +1,4 @@
-# Rodar os seguintes commandos:
+# Rodar os seguintes comandos:
 
 estudo_np=NP001_todas_leituras_combinadas_montagem
 diretorio_execucao_nanopore=~/montagem_nanopore/NP001_todas_leituras_combinadas
