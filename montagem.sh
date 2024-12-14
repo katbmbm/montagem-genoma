@@ -6,7 +6,7 @@ numeros_codigos_barras=({01..15})
 codigos_barras=( "${numeros_codigos_barras[@]/#/codigo_barra}")
 diretorio_saida=~/montagem_nanopore/$estudo_np
 
-conda activate montagem 
+conda activate assembly 
 
 mkdir $diretorio_saida
 for i in ${codigos_barras[@]}
@@ -17,7 +17,7 @@ for i in ${codigos_barras[@]}
 done 
 
 conda deactivate
-conda activate medaka
+conda activate ambienteMedaka
 
 export TF_FORCE_GPU_ALLOW_GROWTH=true
 
@@ -34,7 +34,7 @@ done
 
 # Anotação Prokka (precisa ser mais desenvolvida)
 # conda deactivate
-# conda activate prokka
+# conda activate ambienteProkka
 # for i in ${codigos_barras[@]}
 #   do 
 #   prokka $diretorio_saida/flye_out/$i/medaka_consenso/consensus.fasta --outdir $diretorio_saida/flye_out/$i/medaka_consenso/prokka
@@ -47,7 +47,7 @@ conda deactivate
 #  do 
 #  ~/Desktop/Bandage image $diretorio_saida/flye_out/$i/assembly_graph.gfa $diretorio_saida/flye_out/$i/assembly_graph.jpg 
 #done
-#conda activate estatisticas_nanopore
+#conda activate ambienteSeqkit
 #for i in ${codigos_barras[@]} 
 #  do 
 #  seqkit fx2tab -nl $diretorio_saida/$i.fastq.gz > $diretorio_saida/$i.comprimento_leituras.txt
