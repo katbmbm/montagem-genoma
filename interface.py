@@ -13,7 +13,6 @@ import time
 from tqdm import tqdm
 import requests
 import subprocess
-import os
 
 def selecionar_fasta():
     caminho_arq = filedialog.askopenfilename(
@@ -49,7 +48,7 @@ def executar_montagem():
         for progresso in range(50, 101, 5):
             atualizar_progresso(progresso)
             time.sleep(1)
-        comando_var = f"bash var_medakka.sh {arq_fasta}"
+        comando_var = f"bash var_medaka.sh {arq_fasta}"
         subprocess.run(comando_var, shell=True, check=True)
         atualizar_progresso(100)
         t_resultado.configure(text="Montagem e análise de variantes concluídas com sucesso.")
