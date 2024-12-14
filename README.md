@@ -33,8 +33,12 @@ conda config --add channels conda-forge
 pip --version
 ```
 - Em seguida, pode iniciar a **instalação** e **inicialização** dos **programas** necessários para a montagem. Para isso, segue o passo a passo do arquivo ```instalacao.sh```
-- O próximo passo é rodar os comandos nos arquivos ```montagem.sh``` e ```var_medaka.sh``` da mesma maneira como feito anteriormente. Em ```montagem.sh```, há aluns códigos em comentários, isso é porque a parte de anotação utlilizando Prokka ainda não foi desenvolvida. O programa ainda funciona normalmente para realizar a montagem em si. *Não se esqueça de alterar os primeiros comandos em ```var_medaka.sh``` de acordo com o seu organismo* 
-- Como isso feito, 
+- O próximo passo é rodar os comandos nos arquivos ```montagem.sh``` e ```var_medaka.sh``` da mesma maneira como feito anteriormente. Em ```montagem.sh```, há aluns códigos em comentários.Isso é porque a parte de anotação utlilizando Prokka ainda não foi desenvolvida, porém o programa ainda funciona normalmente para realizar a montagem em si
+- ***Não se esqueça** de alterar os primeiros comandos em ```var_medaka.sh``` de acordo com o seu organismo* 
+- Como isso feito, pode seguir as instruções no arquivo ```interface.py```
+
+## Observações:
+Para a montagem de uma bactéria, o tempo de execução esperado é de 7 a 12 horas. **Não** é recomendado usar a maquina para realizar outras tarefas durante esse tempo.
 
 ## Contato:
 katherine.b@aluno.ifsp.edu.br
