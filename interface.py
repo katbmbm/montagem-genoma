@@ -69,7 +69,7 @@ def baixar_genoma():
                 for pedaco in tqdm(iterable=resposta.iter_content(chunk_size=x), total=tamanho_total / x, unit='KB'):
                     arq.write(pedaco)
                     aplicacao.update_idletasks()
-        time.sleep(11)
+        time.sleep(1)
         t_resultado.configure(text="Download Concluído com Sucesso.")
             
     except Exception as erro:
