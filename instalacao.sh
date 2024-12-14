@@ -1,4 +1,4 @@
-# Rodar os seguintes commandos no terminal (WSL, se estiver no Windows):
+# Rodar os seguintes comandos no terminal (WSL, se estiver no Windows):
 
 create -n assembly python=3.9 flye -y
 conda activate assembly
