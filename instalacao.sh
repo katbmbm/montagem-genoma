@@ -23,12 +23,12 @@ conda deactivate
 python --version
 pip install --upgrade pip
 
-# Instalar Sekit
-conda create -n ambienteSekit python=3.9 -y
-conda activate ambienteSekit
-git clone https://github.com/autor-do-projeto/sekit.git
-cd sekit
-pip install sekit --help
+# Instalar Seqkit
+conda create -n ambienteSeqkit python=3.9 -y
+conda activate ambienteSeqkit
+git clone https://github.com/autor-do-projeto/seqkit.git
+cd seqkit
+pip install seqkit --help
 conda deactivate
 
 # Instalar Quarto
