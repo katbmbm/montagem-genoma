@@ -1,4 +1,4 @@
-# Instalar o import do customtkinter rodando os seguintes comandos no Terminal:
+# Instalar os imports necessários, rodando os seguintes comandos no Terminal:
 
 # pip install customtkinter
 # pip install tqdm
@@ -6,164 +6,161 @@
 
 # Em seguida, rodar esse arquivo por inteiro
 
-# Import required libraries
 import customtkinter as ctk
 import tkinter as tk
 from tkinter import filedialog, messagebox
 import time
 from tqdm import tqdm
 import requests
-import os
-import sys
-import zipfile
-import shutil
 import subprocess
+import os
 
-
-def select_fasta_file():
-    """Opens a file dialog to select a .fna file"""
-    file_path = filedialog.askopenfilename(
+def selecionar_fasta():
+    caminho_arq = filedialog.askopenfilename(
         title="Selecione um arquivo FASTA", filetypes=[("FASTA DNA", "*.fna"), ("All Files", "*.*")]
     )
-
-    if file_path.endswith(".fna"):
-        entry_input.delete(0, ctk.END)
-        entry_input.insert(0, file_path)
+    if caminho_arq.endswith(".fna"):
+        entrada_arq.delete(0, ctk.END)
+        entrada_arq.insert(0, caminho_arq)
     else:
         messagebox.showerror("Erro", "Por favor, selecione um arquivo FASTA válido.")
 
+def atualizar_progresso(valor):
+    barra_progresso.set(valor / 100)
+    t_porcentagem.configure(text=f"{valor}%")
+    aplicacao.update_idletasks()
 
-def download_newest_version():
-    """Handles the download logic and updates GUI"""
-    chunk_size = 1024
-    url = "https://raw.githubusercontent.com/katbmbm/montagem-genoma/main/instalacao.sh"
-    try:
-        result_label.configure(text="Iniciando download do script...")
-        button_download.pack_forget()
-
-
-        # Simulate download progress
-        with requests.get(url, stream=True) as r:
-            total_size = int(r.headers['content-length'])
-            with open('instalacao.sh', 'wb') as f:
-                for data in tqdm(iterable=r.iter_content(chunk_size=chunk_size), total=total_size / chunk_size, unit='KB'):
-                    f.write(data)
-                    app.update_idletasks()
-        
-        # Wait 5 seconds before showing completion
-        time.sleep(5)
-
-        result_label.configure(text="Download Concluído com Sucesso.")
-        
-    except Exception as e:
-        result_label.configure(text=f"Erro no download: {e}")
-
-
-def start_assembly():
-    """Starts assembly and begins simulation"""
-    input_file = entry_input.get()
-
-    if not input_file:
+def executar_montagem():
+    arq_fasta = entrada_arq.get()
+    if not arq_fasta:
         messagebox.showerror("Erro", "Por favor, selecione um arquivo FASTA.")
         return
 
-    # Disable the button
-    button_start.configure(state="disabled", fg_color="gray")
-    result_label.configure(text=f"Montagem em progresso\nArquivo: {input_file}")
+    t_resultado.configure(text=f"Iniciando montagem para {arq_fasta}...")
+    b_comecar.configure(state="disabled", fg_color="gray")
 
-    # Create and start the progress bar
-    create_progress_bar()
-    simulate_progress()
+    try:
+        for progresso in range(0, 101, 5):
+            atualizar_progresso(progresso)
+            time.sleep(1)
+        comando_montagem = f"bash montagem.sh {arq_fasta}"
+        subprocess.run(comando_montagem, shell=True, check=True)
+        t_resultado.configure(text="Montagem concluída. Iniciando análise de variantes...")
+        for progresso in range(50, 101, 5):
+            atualizar_progresso(progresso)
+            time.sleep(1)
+        comando_var = f"bash var_medakka.sh {arq_fasta}"
+        subprocess.run(comando_var, shell=True, check=True)
+        atualizar_progresso(100)
+        t_resultado.configure(text="Montagem e análise de variantes concluídas com sucesso.")
+    except subprocess.CalledProcessError as e:
+        t_resultado.configure(text=f"Erro durante o processo: {e}")
+    finally:
+        b_comecar.configure(state="normal", fg_color="#2E8B57")
 
+def baixar_genoma():
+    x = 1024
+    endereco = "https://raw.githubusercontent.com/katbmbm/montagem-genoma/main/instalacao.sh"
+    try:    
+        t_resultado.configure(text="Iniciando download do genoma montado...")
+        b_baixar.pack_forget()
+        with requests.get(endereco, stream=True) as resposta:
+            tamanho_total = int(resposta.headers['content-length'])
+            with open('instalacao.sh', 'wb') as arq:
+                for pedaco in tqdm(iterable=resposta.iter_content(chunk_size=x), total=tamanho_total / x, unit='KB'):
+                    arq.write(pedaco)
+                    aplicacao.update_idletasks()
+        time.sleep(11)
+        t_resultado.configure(text="Download Concluído com Sucesso.")
+            
+    except Exception as erro:
+        t_resultado.configure(text=f"Erro no download: {erro}")
 
-def create_progress_bar():
-    """Display the progress bar"""
-    progress_bar.pack(pady=10)
-    percent_label.pack(pady=0)
+def comecar_montagem():
+    executar_montagem()
+    arq_fasta = entrada_arq.get()
+    if not arq_fasta:
+        messagebox.showerror("Erro", "Por favor, selecione um arquivo FASTA.")
+        x=0
+        return
+    b_comecar.configure(state="disabled", fg_color="gray")
+    x = range(progresso)
+    t_resultado.configure(text=f"Montagem em progresso\nArquivo: {arq_fasta}")
+    barra_estatico()
+    barra_dinamico()
 
+def barra_estatico():
+    barra_progresso.pack(pady=10)
+    t_porcentagem.pack(pady=0)
 
-def simulate_progress():
-    """Simulates progress and enables the download button at 100%."""
+def barra_dinamico():
     total = 100
-    progress = 0
-
-    while progress <= total:
-        if progress < 1:
-            time.sleep(2)
+    progresso = 0
+    while progresso <= total:
+        if progresso < 1:
+            time.sleep(3)
         else:
-            time.sleep(0.05)  # Simulate quick progress after reaching a point
+            time.sleep(10)
+        atualizar_progresso(progresso)
+        barra_progresso.set(progresso / total)
+        t_porcentagem.configure(text=f"{progresso}%")
+        aplicacao.update_idletasks()
+        if progresso == 100:
+            mostrar_b_baixar()
 
-        progress_bar.set(progress / total)
-        percent_label.configure(text=f"{progress}%")
-        app.update_idletasks()
-        progress += 1
+def mostrar_b_baixar():
+    if not b_baixar.winfo_ismapped():
+        b_baixar.pack(pady=10)
+        b_baixar.configure(state="normal", fg_color="#2E8B57")
+        t_resultado.configure(text="Montagem concluída! Clique para fazer o download.")
 
-        if progress == 100:  # Trigger showing the download button
-            show_download_button()
-
-
-def show_download_button():
-    """Show the download button only when the progress bar is full"""
-    if not button_download.winfo_ismapped():  # Check if it's already visible
-        button_download.pack(pady=10)
-        button_download.configure(state="normal", fg_color="#2E8B57")  # Set color same as other buttons
-        result_label.configure(text="Montagem concluída! Clique para fazer o download.")
-
-
-# Main application window
-app = ctk.CTk()
-app.title("Montagem de Genoma Bacteriano")
-app.geometry("800x580")
+aplicacao = ctk.CTk()
+aplicacao.title("Montagem de Genoma Bacteriano")
+aplicacao.geometry("800x580")
 ctk.set_appearance_mode("dark")
 
-# Title label
-title_label = ctk.CTkLabel(
-    app, text="Montagem de Genoma Bacteriano",
+t_titulo = ctk.CTkLabel(
+    aplicacao, text="Montagem de Genoma Bacteriano",
     font=ctk.CTkFont(size=23, weight="bold")
 )
-title_label.pack(pady=20)
+t_titulo.pack(pady=20)
 
-# Indications section
-indications_title = ctk.CTkLabel(
-    app, text="Indicações para Melhores Resultados:",
+titulo_indicacoes = ctk.CTkLabel(
+    aplicacao, text="Indicações para Melhores Resultados:",
     font=ctk.CTkFont(size=17, weight="bold"), justify="left", anchor="w"
 )
-indications_title.pack(pady=(10, 0))
-indications_label = ctk.CTkLabel(
-    app, text=("Realize a quantificação precisa do DNA para assegurar a concentração ideal.\n"
+titulo_indicacoes.pack(pady=(10, 0))
+t_indicacoes = ctk.CTkLabel(
+    aplicacao, text=("Realize a quantificação precisa do DNA para assegurar a concentração ideal.\n"
                "Utilize o Ligation Sequencing Kit da Oxford Nanopore para a geração de dados brutos de alta qualidade.\n"
                "Execute a montagem genômica em um computador com no mínimo 32 GB de memória RAM.\n"
                "Recomendamos o uso de Linux ou Windows com o WSL devidamente configurado."), 
     font=ctk.CTkFont(size=15), justify="left", wraplength=550
 )
-indications_label.pack(pady=10, padx=20)
+t_indicacoes.pack(pady=10, padx=20)
 
-# Input section
-input_frame = ctk.CTkFrame(app)
-input_frame.pack(pady=20, padx=20)
-entry_input = ctk.CTkEntry(input_frame, width=370)
-entry_input.grid(row=0, column=0, padx=5, pady=10)
+quadro_entrada = ctk.CTkFrame(aplicacao)
+quadro_entrada.pack(pady=20, padx=20)
+entrada_arq = ctk.CTkEntry(quadro_entrada, width=370)
+entrada_arq.grid(row=0, column=0, padx=5, pady=10)
 
-# Buttons
-browse_button = ctk.CTkButton(input_frame, text="Selecionar .FASTA", command=select_fasta_file, font=ctk.CTkFont(size=13))
-browse_button.grid(row=0, column=1, padx=5, pady=10)
+b_procurar = ctk.CTkButton(quadro_entrada, text="Selecionar .FASTA", command=selecionar_fasta, font=ctk.CTkFont(size=13))
+b_procurar.grid(row=0, column=1, padx=5, pady=10)
 
-button_start = ctk.CTkButton(
-    app, text="Iniciar Montagem", command=start_assembly, font=ctk.CTkFont(size=14), width=160, height=35
+b_comecar = ctk.CTkButton(
+    aplicacao, text="Iniciar Montagem", command=comecar_montagem, font=ctk.CTkFont(size=14), width=160, height=35
 )
-button_start.pack(pady=30)
+b_comecar.pack(pady=30)
 
-button_download = ctk.CTkButton(
-    app, text="Download Script", command=download_newest_version, font=ctk.CTkFont(size=14), width=160, height=35,
+b_baixar = ctk.CTkButton(
+    aplicacao, text="Baixar Genoma", command=baixar_genoma, font=ctk.CTkFont(size=14), width=160, height=35,
     state="disabled"
 )
 
-# Progress bar & UI elements
-progress_bar = ctk.CTkProgressBar(app, width=500)
-progress_bar.set(0)
-percent_label = ctk.CTkLabel(app, text="0%", font=ctk.CTkFont(size=14))
-result_label = ctk.CTkLabel(app, text="", font=ctk.CTkFont(size=14))
-result_label.pack(pady=5)
+barra_progresso = ctk.CTkProgressBar(aplicacao, width=500)
+barra_progresso.set(0)
+t_porcentagem = ctk.CTkLabel(aplicacao, text="0%", font=ctk.CTkFont(size=14))
+t_resultado = ctk.CTkLabel(aplicacao, text="", font=ctk.CTkFont(size=14))
+t_resultado.pack(pady=5)
 
-# Run the application
-app.mainloop()
+aplicacao.mainloop()
