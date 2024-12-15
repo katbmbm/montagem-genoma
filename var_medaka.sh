@@ -1,16 +1,15 @@
 #rodar os seguintes comandos:
-
-estudo_np=NP001_todas_leituras_combinadas_montagem
-diretorio_execucao_nanopore=~/montagem_nanopore/NP001_todas_leituras_combinadas
-numeros_codigos_barras=({01..13})
-codigos_barras=( "${numeros_codigos_barras[@]/#/codigo_barra}")
+npstudy=NP001_all_reads_combined_assembly
+nanopore_run_directory=~/nanopore_assembly/NP001_all_reads_combined
+barcode_numbers=({01..13})
+barcodes=( "${barcode_numbers[@]/#/barcode}")
 # Entrar o caminho do diretório de saida desejada para o genoma montado
-diretorio_saida=~/montagem_nanopore/$estudo_np
+outdir=~/nanopore_assembly/$npstudy
 # Usar um genoma de referência de acordo com a espécie de bactéria que será montada:
-genoma_referencia=~/analise_nanopore/NP001_bacillus/Bacillus_velezensis_CATA_TTA_814.fasta
+reference_fasta=~/nanopore_analysis/NP001_strep/Streptococcus_pneumoniae_ATCC_BAA_334.fasta
 
-conda activate medaka   
-for i in ${codigos_barras[@]}
+conda activate ambienteMedaka   
+for i in ${barcodes[@]}
   do 
-    medaka_haploid_variant -i $diretorio_saida/$i.fastq.gz -r $genoma_referencia -o $diretorio_saida/flye_out/$i/medaka_variant/
+  medaka_haploid_variant -i $outdir/$i.fastq.gz -r $reference_fasta -o $outdir/flye_out/$i/medaka_variant/
 done 
