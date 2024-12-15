@@ -1,35 +1,34 @@
 # Rodar os seguintes comandos:
 
-estudo_np=NP001_todas_leituras_combinadas_montagem
-diretorio_execucao_nanopore=~/montagem_nanopore/NP001_todas_leituras_combinadas
-numeros_codigos_barras=({01..15})
-codigos_barras=( "${numeros_codigos_barras[@]/#/codigo_barra}")
-diretorio_saida=~/montagem_nanopore/$estudo_np
+npstudy=NP001_all_reads_combined_assembly
+nanopore_run_directory=~/nanopore_assembly/NP001_all_reads_combined
+barcode_numbers=({01..15})
+barcodes=( "${barcode_numbers[@]/#/barcode}")
+outdir=~/nanopore_assembly/$npstudy
 
 conda activate assembly 
 
-mkdir $diretorio_saida
-for i in ${codigos_barras[@]}
+mkdir $outdir
+for i in ${barcodes[@]}
   do 
-  mkdir -p $diretorio_saida/flye_out/$i 
-  cat $diretorio_execucao_nanopore/$i/*.fastq.gz > $diretorio_saida/$i.fastq.gz
-  flye --nano-raw $diretorio_saida/$i.fastq.gz --out-dir $diretorio_saida/flye_out/$i --threads 20 
+  mkdir $outdir/flye_out/$i -p 
+  cat $nanopore_run_directory/$i/*.fastq.gz > $outdir/$i.fastq.gz
+  flye --nano-raw $outdir/$i.fastq.gz --out-dir $outdir/flye_out/$i --threads 20 
 done 
 
 conda deactivate
 conda activate ambienteMedaka
 
 export TF_FORCE_GPU_ALLOW_GROWTH=true
-
-for i in ${codigos_barras[@]}
+for i in ${barcodes[@]}
   do 
-  mkdir $diretorio_saida/flye_out/$i/medaka_consenso/
-  medaka_consensus -i $diretorio_saida/$i.fastq.gz -d $diretorio_saida/flye_out/$i/assembly.fasta -o $diretorio_saida/flye_out/$i/medaka_consenso/ -t 20 -m r1041_e82_260bps_hac_g632 -b 70
+  mkdir  $outdir/flye_out/$i/medaka_consensus/
+  medaka_consensus -i $outdir/$i.fastq.gz -d $outdir/flye_out/$i/assembly.fasta -o $outdir/flye_out/$i/medaka_consensus/ -t 20 -m r1041_e82_260bps_hac_g632 -b 70
 done
 
-for i in ${codigos_barras[@]}
+for i in ${barcodes[@]}
   do 
-  sed "s/>/>$i\//I" $diretorio_saida/flye_out/$i/medaka_consenso/consensus.fasta > $diretorio_saida/flye_out/$i/medaka_consenso/consensus.nomeado.fasta
+  sed "s/>/>$i\//I" $outdir/flye_out/$i/medaka_consensus/consensus.fasta > $outdir/flye_out/$i/medaka_consensus/consensus.named.fasta
 done
 
 # Anotação Prokka (precisa ser mais desenvolvida)
@@ -53,5 +52,5 @@ conda deactivate
 #  seqkit fx2tab -nl $diretorio_saida/$i.fastq.gz > $diretorio_saida/$i.comprimento_leituras.txt
 #done
 
-quarto render ~/montagem_nanopore/modelo_relatorio_nanopore.qmd -P $estudo_np
-mv ~/montagem_nanopore/modelo_relatorio_nanopore.html $diretorio_saida/modelo_relatorio_nanopore.html
+quarto render ~/nanopore_assembly/nanopore_report_template.qmd -P $npstudy
+mv ~nanopore_assembly/nanopore_report_template.html $outdir/nanopore_report_template.html
