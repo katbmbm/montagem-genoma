@@ -12,6 +12,17 @@ Para desenvolver o projeto, usamos como base os códigos disponíveis no seguint
 - Recomendamos executar a montagem em um computador com **no mínimo 32GB** de memória **RAM**
 - O _pipeline_ foi desenvolvido para ser executado no **Linux** ou no Windows. Se usar o Windows, é necessário instalar e ativar o **WSL** (Windows Subsistema para Linux)
 
+## Instruções:
+### Determinando a qualidade dos _reads_ com fastp:
+- Primeiramente, instale o fastp apertando [aqui](https://github.com/OpenGene/fastp), seguindo as instruções no repositório
+- Com o fastp instalado, roda o seguinte comando no seu terminal de WSL, realizando as devidas substituições:
+```
+fastp -i diretório1 -h diretório2  -j /dev/null -w 16
+```
+> Subistitua ```diretório1``` pelo local dos reads (dados brutos a montar) na sua máquina\
+> Subistitua ```diretório2``` pelo local onde deseja salvar o arquivo output (.html)\
+> Caso necessário, subistitua ```16``` pelos nucleos de processamento da sua maquina
+
 ## Como usar esse repositório:
 - É necessário **clonar** esse repositório e abrir ele em uma ferramenta de desenvolvedor como o Visual Studio
 - No terminal do **Linux** ou no **WSL**, instalar **miniconda** com o seguinte código:
