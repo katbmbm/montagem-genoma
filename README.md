@@ -31,7 +31,7 @@ conda config --add channels conda-forge
 ```
 pip --version
 ```
-### Determinando a qualidade dos _reads_ com fastp:
+### Determinando a Qualidade dos _reads_ com Fastp:
 Recomenda-se fazer a avaliação da qualidade dos seus dados brutos antes da montagem, para verificar se há a quantidade de bases o suficiente para prosseguir.
 - Primeiramente, instale o **Fastp** apertando [aqui](https://github.com/OpenGene/fastp), seguindo as instruções no repositório
 - Com o **Fastp** instalado, roda o seguinte comando no seu terminal, realizando as devidas substituições:
@@ -43,7 +43,7 @@ fastp -i diretório1 -h diretório2 -j /dev/null -w 16
 > Caso necessário, subistitua ```16``` pelos nucleos de processamento da sua maquina
 - Abra o aquivo output .html para obter os resultadados da avaliação
 
-### A montagem:
+### A Montagem:
 - Para a montagem, usamos o **Canu**. Para realizar sua instalação, aperta [aqui](https://github.com/marbl/canu)
 - Com o **Canu** devidamente instalado, roda o seguinte comando no mesmo terminal, realizando novamente, as substituições:
 ```
@@ -55,7 +55,7 @@ canu maxThreads=16 useGrid=false -p nome -d diretório1 genomeSize=11m maxInputC
 > Opcionalmente, subistitua ```11m``` pelo tamanho do genoma de referência (NCBI)\
 > Subistitua ```diretório2``` pelo local dos reads (.FASTQ) na sua máquina
 
-### Avaliando a qualidade da montagem:
+### Avaliando a Qualidade da Montagem:
 - Por último, podemos avaliar a qualidade da montagem usando o **QUAST**. Aperte [aqui](https://github.com/ablab/quast) para realizar sua instalação.
 - Após sua instalação, roda o seguinte comando no seu terminal:
 ```
