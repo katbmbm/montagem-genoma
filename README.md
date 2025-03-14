@@ -68,7 +68,7 @@ quast.py diretório1 -r diretório2 -o diretório3
 
 ## Observações:
 - Para a montagem de uma bactéria, o tempo de execução esperado é de 7 a 12 horas. **Não** é recomendado usar a maquina para realizar outras tarefas durante esse tempo.
-- O aquivo de saída será **.config.fasta**
+- O aquivo de saída da montagem será **.configs.fasta**
 
 ## Contato:
 katherine.b@aluno.ifsp.edu.br
