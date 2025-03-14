@@ -62,9 +62,9 @@ canu maxThreads=16 useGrid=false -p nome -d diretório1 genomeSize=11m maxInputC
 quast.py diretório1 -r diretório2 -o diretório3
 ```
 > Subistitua ```diretório1```   pelo local do arquivo .contigs.fasta da montagem do genoma\
-> Subistitua ```diretório2``` pelo genoma de referência do ncbi\
-> Subistitua ```diretório3``` pelo local onde deseja salvar o arquivo output
-- Abra o aquivo output para obter os resultados da avaliação da qualidade
+> Subistitua ```diretório2``` pelo genoma de referência do NCBI\
+> Subistitua ```diretório3``` pelo local onde deseja salvar o arquivo de saída
+- Abra o aquivo de saída para obter os resultados da avaliação da qualidade da montagem
 
 ## Observações:
 - Para a montagem de uma bactéria, o tempo de execução esperado é de 7 a 12 horas. **Não** é recomendado usar a maquina para realizar outras tarefas durante esse tempo.
