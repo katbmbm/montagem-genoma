@@ -1,7 +1,7 @@
 # Montagem de Genoma Bacteriano
 ## Introdução:
 
-A seguir está um _pipeline_ computacional usado para realizar a montagem automática de genomas bacterianos, criado por Katherine Bilsland Marchesan e Luiza Rodrigues de Souza no Instituto Federal de São Paulo (IFSP), Campus Campinas.
+A seguir está um _pipeline_ computacional usado para realizar a montagem de genomas bacterianos, criado por Katherine Bilsland Marchesan e Luiza Rodrigues de Souza no Instituto Federal de São Paulo (IFSP), Campus Campinas.
 
 Para desenvolver o projeto, usamos como base os códigos disponíveis no seguinte repositório:
 **https://github.com/baynec2/nanopore_pipelines**
