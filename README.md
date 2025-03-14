@@ -34,36 +34,36 @@ pip --version
 ### Determinando a Qualidade dos _reads_ com Fastp:
 Recomenda-se fazer a avaliação da qualidade dos seus dados brutos antes da montagem, para verificar se há a quantidade de bases o suficiente para prosseguir.
 - Primeiramente, instale o **Fastp** apertando [aqui](https://github.com/OpenGene/fastp), seguindo as instruções no repositório
-- Com o **Fastp** instalado, roda o seguinte comando no seu terminal, realizando as devidas substituições:
+- Com o **Fastp** instalado, rode o seguinte comando no seu terminal, realizando as devidas substituições:
 ```
 fastp -i diretório1 -h diretório2 -j /dev/null -w 16
 ```
-> Subistitua ```diretório1``` pelo local dos reads (dados brutos a testar) na sua máquina\
-> Subistitua ```diretório2``` pelo local onde deseja salvar o arquivo  de saída (.html)\
-> Caso necessário, subistitua ```16``` pelos nucleos de processamento da sua maquina
+> Substitua ```diretório1``` pelo local dos reads (dados brutos a testar) na sua máquina\
+> Substitua ```diretório2``` pelo local onde deseja salvar o arquivo  de saída (.html)\
+> Caso necessário, substitua ```16``` pelos nucleos de processamento da sua maquina
 - Abra o aquivo de saída (do tipo .html) para obter os resultadados da avaliação
 
 ### A Montagem:
-- Para a montagem, usamos o **Canu**. Para realizar sua instalação, aperta [aqui](https://github.com/marbl/canu)
-- Com o **Canu** devidamente instalado, roda o seguinte comando no mesmo terminal, realizando novamente, as substituições:
+- Para a montagem, usamos o **Canu**. Para realizar sua instalação, aperte [aqui](https://github.com/marbl/canu)
+- Com o **Canu** devidamente instalado, rode o seguinte comando no mesmo terminal, realizando novamente, as substituições:
 ```
 canu maxThreads=16 useGrid=false -p nome -d diretório1 genomeSize=11m maxInputCoverage=100 -nanopore diretório2
 ```
-> Caso necessário, subistitua ```16``` pelos nucleos de processamento da sua maquina\
-> Subistitua ```nome``` pelo nome desejada da sua amostra. Ele será o arquivo de saída\
-> Subistitua ```diretório1``` pelo local onde deseja salvar o output\
-> Opcionalmente, subistitua ```11m``` pelo tamanho do genoma de referência (NCBI)\
-> Subistitua ```diretório2``` pelo local dos reads (.FASTQ) na sua máquina
+> Caso necessário, substitua ```16``` pelos nucleos de processamento da sua maquina\
+> Substitua ```nome``` pelo nome desejada da sua amostra. Ele será o arquivo de saída\
+> Substitua ```diretório1``` pelo local onde deseja salvar o output\
+> Opcionalmente, substitua ```11m``` pelo tamanho do genoma de referência (NCBI)\
+> Substitua ```diretório2``` pelo local dos reads (.FASTQ) na sua máquina
 
 ### Avaliando a Qualidade da Montagem:
 - Por último, podemos avaliar a qualidade da montagem usando o **QUAST**. Aperte [aqui](https://github.com/ablab/quast) para realizar sua instalação.
-- Após sua instalação, roda o seguinte comando no seu terminal:
+- Após sua instalação, rode o seguinte comando no seu terminal:
 ```
 quast.py diretório1 -r diretório2 -o diretório3
 ```
-> Subistitua ```diretório1```   pelo local do arquivo .contigs.fasta da montagem do genoma\
-> Subistitua ```diretório2``` pelo genoma de referência do NCBI\
-> Subistitua ```diretório3``` pelo local onde deseja salvar o arquivo de saída
+> Substitua ```diretório1```   pelo local do arquivo .contigs.fasta da montagem do genoma\
+> Substitua ```diretório2``` pelo genoma de referência do NCBI\
+> Substitua ```diretório3``` pelo local onde deseja salvar o arquivo de saída
 - Abra o aquivo de saída para obter os resultados da avaliação da qualidade da montagem
 
 ## Observações:
