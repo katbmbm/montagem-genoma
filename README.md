@@ -33,8 +33,8 @@ pip --version
 ```
 ### Determinando a qualidade dos _reads_ com fastp:
 Recomenda-se fazer a avaliação da qualidade dos seus dados brutos antes da montagem, para verificar se há a quantidade de bases o suficiente para prosseguir.
-- Primeiramente, instale o fastp apertando [aqui](https://github.com/OpenGene/fastp), seguindo as instruções no repositório
-- Com o fastp instalado, roda o seguinte comando no seu terminal, realizando as devidas substituições:
+- Primeiramente, instale o **Fastp** apertando [aqui](https://github.com/OpenGene/fastp), seguindo as instruções no repositório
+- Com o **Fastp** instalado, roda o seguinte comando no seu terminal, realizando as devidas substituições:
 ```
 fastp -i diretório1 -h diretório2 -j /dev/null -w 16
 ```
@@ -44,8 +44,8 @@ fastp -i diretório1 -h diretório2 -j /dev/null -w 16
 - Abra o aquivo output .html para obter os resultadados da avaliação
 
 ### A montagem:
-- Para a montagem, usamos o Canu. Para realizar sua instalação, aperta [aqui](https://github.com/marbl/canu)
-- Com o Canu devidamente instalado, roda o seguinte comando no mesmo terminal, realizando novamente, as substituições:
+- Para a montagem, usamos o **Canu**. Para realizar sua instalação, aperta [aqui](https://github.com/marbl/canu)
+- Com o **Canu** devidamente instalado, roda o seguinte comando no mesmo terminal, realizando novamente, as substituições:
 ```
 canu maxThreads=16 useGrid=false -p nome -d diretório1 genomeSize=11m maxInputCoverage=100 -nanopore diretório2
 ```
@@ -56,7 +56,7 @@ canu maxThreads=16 useGrid=false -p nome -d diretório1 genomeSize=11m maxInputC
 > Subistitua ```diretório2``` pelo local dos reads (.FASTQ) na sua máquina
 
 ### Avaliando a qualidade da montagem:
-- Por último, podemos avaliar a qualidade da montagem usando o QUAST. Aperte [aqui](https://github.com/ablab/quast) para realizar sua instalação.
+- Por último, podemos avaliar a qualidade da montagem usando o **QUAST**. Aperte [aqui](https://github.com/ablab/quast) para realizar sua instalação.
 - Após sua instalação, roda o seguinte comando no seu terminal:
 ```
 quast.py diretório1 -r diretório2 -o diretório3
