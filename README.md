@@ -50,7 +50,7 @@ fastp -i diretório1 -h diretório2 -j /dev/null -w 16
 canu maxThreads=16 useGrid=false -p nome -d diretório1 genomeSize=11m maxInputCoverage=100 -nanopore diretório2
 ```
 > Caso necessário, subistitua ```16``` pelos nucleos de processamento da sua maquina\
-> Subistitua ```nome``` pelo nome desejada da sua amostra. Ele será o output\
+> Subistitua ```nome``` pelo nome desejada da sua amostra. Ele será o arquivo de saída\
 > Subistitua ```diretório1``` pelo local onde deseja salvar o output\
 > Opcionalmente, subistitua ```11m``` pelo tamanho do genoma de referência (NCBI)\
 > Subistitua ```diretório2``` pelo local dos reads (.FASTQ) na sua máquina
