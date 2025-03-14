@@ -13,27 +13,15 @@ Para desenvolver o projeto, usamos como base os códigos disponíveis no seguint
 - O _pipeline_ foi desenvolvido para ser executado no **Linux** ou no Windows. Se usar o Windows, é necessário instalar e ativar o **WSL** (Windows Subsistema para Linux)
 
 ## Instruções:
-### Determinando a qualidade dos _reads_ com fastp:
-- Primeiramente, instale o fastp apertando [aqui](https://github.com/OpenGene/fastp), seguindo as instruções no repositório
-- Com o fastp instalado, roda o seguinte comando no seu terminal de WSL, realizando as devidas substituições:
-```
-fastp -i diretório1 -h diretório2  -j /dev/null -w 16
-```
-> Subistitua ```diretório1``` pelo local dos reads (dados brutos a montar) na sua máquina\
-> Subistitua ```diretório2``` pelo local onde deseja salvar o arquivo output (.html)\
-> Caso necessário, subistitua ```16``` pelos nucleos de processamento da sua maquina
-
-## Como usar esse repositório:
-- É necessário **clonar** esse repositório e abrir ele em uma ferramenta de desenvolvedor como o Visual Studio
-- No terminal do **Linux** ou no **WSL**, instalar **miniconda** com o seguinte código:
+- No terminal do **Linux** ou no **WSL**, instalar **miniconda**, copiando e colando o seguinte código:
 ```
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh bash Miniconda3-latest-Linux-x86_64.sh
 ```
-- Ativar o **miniconda**:
+- Roda o seguinte comando para ativar o **miniconda**:
 ```
 source ~/miniconda3/bin/activate
 ```
-- Configurar os canais:
+- Depois, utilize esses comandos para configurar os canais:
 ```
 conda config --add channels defaults
 conda config --add channels bioconda
@@ -43,10 +31,40 @@ conda config --add channels conda-forge
 ```
 pip --version
 ```
-- Em seguida, pode iniciar a **instalação** e **inicialização** dos **programas** necessários para a montagem. Para isso, segue o passo a passo do arquivo ```instalacao.sh```
-- O próximo passo é rodar os comandos nos arquivos ```montagem.sh``` e ```var_medaka.sh``` da mesma maneira como feito anteriormente. Em ```montagem.sh```, há alguns códigos em comentários. Isso é porque a parte de anotação utlilizando Prokka ainda **não foi desenvolvida**, porém o programa ainda funciona normalmente para realizar a montagem em si
-- ***Não se esqueça** de alterar os primeiros comandos em *```var_medaka.sh```* de acordo com o seu organismo* 
-- Feito isso, pode seguir as instruções no arquivo ```interface.py```
+### Determinando a qualidade dos _reads_ com fastp:
+Recomenda-se fazer a avaliação da qualidade dos seus dados brutos antes da montagem, para verificar se há a quantidade de bases o suficiente para prosseguir.
+- Primeiramente, instale o fastp apertando [aqui](https://github.com/OpenGene/fastp), seguindo as instruções no repositório
+- Com o fastp instalado, roda o seguinte comando no seu terminal, realizando as devidas substituições:
+```
+fastp -i diretório1 -h diretório2 -j /dev/null -w 16
+```
+> Subistitua ```diretório1``` pelo local dos reads (dados brutos a testar) na sua máquina\
+> Subistitua ```diretório2``` pelo local onde deseja salvar o arquivo output (.html)\
+> Caso necessário, subistitua ```16``` pelos nucleos de processamento da sua maquina
+- Abra o aquivo output .html para obter os resultadados da avaliação
+
+### A montagem:
+- Para a montagem, usamos o Canu. Para realizar sua instalação, aperta [aqui](https://github.com/marbl/canu)
+- Com o Canu devidamente instalado, roda o seguinte comando no mesmo terminal, realizando novamente, as substituições:
+```
+canu maxThreads=16 useGrid=false -p nome -d diretório1 genomeSize=11m maxInputCoverage=100 -nanopore diretório2
+```
+> Caso necessário, subistitua ```16``` pelos nucleos de processamento da sua maquina\
+> Subistitua ```nome``` pelo nome desejada da sua amostra. Ele será o output\
+> Subistitua ```diretório1``` pelo local onde deseja salvar o output\
+> Opcionalmente, subistitua ```11m``` pelo tamanho do genoma de referência (NCBI)\
+> Subistitua ```diretório2``` pelo local dos reads (.FASTQ) na sua máquina
+
+### Avaliando a qualidade da montagem:
+- Por último, podemos avaliar a qualidade da montagem usando o QUAST. Aperte [aqui](https://github.com/ablab/quast) para realizar sua instalação.
+- Após sua instalação, roda o seguinte comando no seu terminal:
+```
+quast.py diretório1 -r diretório2 -o diretório3
+```
+> Subistitua ```diretório1```   pelo local do arquivo .contigs.fasta da montagem do genoma\
+> Subistitua ```diretório2``` pelo genoma de referência do ncbi\
+> Subistitua ```diretório3``` pelo local onde deseja salvar o arquivo output
+- Abra o aquivo output para obter os resultados da avaliação da qualidade
 
 ## Observações:
 - Para a montagem de uma bactéria, o tempo de execução esperado é de 7 a 12 horas. **Não** é recomendado usar a maquina para realizar outras tarefas durante esse tempo.
