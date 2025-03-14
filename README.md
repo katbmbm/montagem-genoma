@@ -39,9 +39,9 @@ Recomenda-se fazer a avaliação da qualidade dos seus dados brutos antes da mon
 fastp -i diretório1 -h diretório2 -j /dev/null -w 16
 ```
 > Subistitua ```diretório1``` pelo local dos reads (dados brutos a testar) na sua máquina\
-> Subistitua ```diretório2``` pelo local onde deseja salvar o arquivo output (.html)\
+> Subistitua ```diretório2``` pelo local onde deseja salvar o arquivo  de saída (.html)\
 > Caso necessário, subistitua ```16``` pelos nucleos de processamento da sua maquina
-- Abra o aquivo output .html para obter os resultadados da avaliação
+- Abra o aquivo de saída (do tipo .html) para obter os resultadados da avaliação
 
 ### A Montagem:
 - Para a montagem, usamos o **Canu**. Para realizar sua instalação, aperta [aqui](https://github.com/marbl/canu)
