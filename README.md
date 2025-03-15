@@ -38,8 +38,8 @@ Recomenda-se fazer a avaliação da qualidade dos seus dados brutos antes da mon
 ```
 fastp -i diretório1 -h diretório2 -j /dev/null -w 16
 ```
-> Substitua ```diretório1``` pelo local dos reads (dados brutos a testar) na sua máquina\
-> Substitua ```diretório2``` pelo local onde deseja salvar o arquivo  de saída (.html)\
+> Substitua ```diretório1``` pelo caminho do arquivo dos reads (dados brutos a testar) na sua máquina\
+> Substitua ```diretório2``` pelo caminho do local onde deseja salvar o arquivo  de saída (.html)\
 > Caso necessário, substitua ```16``` pelos nucleos de processamento da sua maquina
 - Abra o aquivo de saída (do tipo .html) para obter os resultadados da avaliação
 
@@ -51,9 +51,9 @@ canu maxThreads=16 useGrid=false -p nome -d diretório1 genomeSize=11m maxInputC
 ```
 > Caso necessário, substitua ```16``` pelos nucleos de processamento da sua maquina\
 > Substitua ```nome``` pelo nome desejada da sua amostra. Ele será o arquivo de saída\
-> Substitua ```diretório1``` pelo local onde deseja salvar o output\
+> Substitua ```diretório1``` pelo caminho do local onde deseja salvar o output\
 > Opcionalmente, substitua ```11m``` pelo tamanho do genoma de referência (NCBI)\
-> Substitua ```diretório2``` pelo local dos reads (.FASTQ) na sua máquina
+> Substitua ```diretório2``` pelo caminho do arquivo dos reads (.FASTQ) na sua máquina
 
 ### Avaliando a Qualidade da Montagem:
 - Por último, podemos avaliar a qualidade da montagem usando o **QUAST**. Aperte [aqui](https://github.com/ablab/quast) para realizar sua instalação.
@@ -61,9 +61,9 @@ canu maxThreads=16 useGrid=false -p nome -d diretório1 genomeSize=11m maxInputC
 ```
 quast.py diretório1 -r diretório2 -o diretório3
 ```
-> Substitua ```diretório1```   pelo local do arquivo .contigs.fasta da montagem do genoma\
+> Substitua ```diretório1```   pelo caminho do arquivo .contigs.fasta da montagem do genoma\
 > Substitua ```diretório2``` pelo genoma de referência do NCBI\
-> Substitua ```diretório3``` pelo local onde deseja salvar o arquivo de saída
+> Substitua ```diretório3``` pelo caminho do local onde deseja salvar o arquivo de saída
 - Abra o aquivo de saída para obter os resultados da avaliação da qualidade da montagem
 
 ## Observações:
