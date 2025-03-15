@@ -21,7 +21,7 @@ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh bash 
 ```
 source ~/miniconda3/bin/activate
 ```
-- Depois, utilize esses comandos para configurar os canais:
+- Depois, utilize esses comandos: (Eles irão configurar os canais)
 ```
 conda config --add channels defaults
 conda config --add channels bioconda
