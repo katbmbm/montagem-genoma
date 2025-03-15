@@ -17,7 +17,7 @@ Para desenvolver o projeto, usamos como base os códigos disponíveis no seguint
 ```
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh bash Miniconda3-latest-Linux-x86_64.sh
 ```
-- Roda o seguinte comando para ativar o **miniconda**:
+- Ainda no terminal, roda o seguinte comando para ativar o **miniconda**:
 ```
 source ~/miniconda3/bin/activate
 ```
