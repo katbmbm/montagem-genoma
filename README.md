@@ -74,3 +74,5 @@ quast.py diretório1 -r diretório2 -o diretório3
 katherine.b@aluno.ifsp.edu.br
 
 luiza.souza@aluno.ifsp.edu.br
+
+***Para obter informações sobre o projeto que deu origem a esse repositório, acesse: [busca-por-novos-antibioticos.ib.unicamp.br](https://busca-por-novos-antibioticos.ib.unicamp.br/)**
